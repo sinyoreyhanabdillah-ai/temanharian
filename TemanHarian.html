@@ -1,0 +1,3450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TEMANHARIAN</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(180deg,#f4fff8,#ffffff);
+    color:#173b29;
+    min-height:100vh;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:linear-gradient(135deg,#eafff0,#ffffff);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.loading-logo{
+    color:#08763f;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.loader{
+    width:42px;
+    height:42px;
+    border:4px solid #dffbe8;
+    border-top-color:#199957;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+#loadingScreen p{
+    margin-top:15px;
+    color:#6b8175;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================
+   ENTRANCE
+========================= */
+
+.full-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+#entrancePage{
+    background:
+        radial-gradient(
+            circle at top,
+            #dffbe8,
+            #ffffff 60%
+        );
+}
+
+.entrance-box{
+    width:100%;
+    max-width:450px;
+    text-align:center;
+    background:#ffffff;
+    padding:45px 30px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(27,120,70,.10);
+}
+
+.logo-big{
+    color:#08763f;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.subtitle{
+    color:#6b8175;
+    margin:15px 0 30px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.primary-btn{
+    background:linear-gradient(
+        135deg,
+        #63d98b,
+        #199957
+    );
+    color:white;
+    border:none;
+    border-radius:13px;
+    padding:13px 20px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+}
+
+.full{
+    width:100%;
+}
+
+.back-btn{
+    background:#dffbe8;
+    color:#08763f;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.danger-btn{
+    background:#ffe7e7;
+    color:#c73535;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+
+/* =========================
+   AUTH
+========================= */
+
+#authPage{
+    background:linear-gradient(
+        135deg,
+        #eafff0,
+        #ffffff
+    );
+}
+
+.auth-box{
+    width:100%;
+    max-width:440px;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(27,120,70,.10);
+}
+
+.auth-logo{
+    text-align:center;
+    color:#08763f;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+.auth-tabs{
+    display:flex;
+    background:#effff4;
+    border-radius:12px;
+    padding:5px;
+    margin-bottom:25px;
+}
+
+.auth-tab{
+    flex:1;
+    border:none;
+    background:transparent;
+    padding:11px;
+    border-radius:9px;
+    font-weight:700;
+    color:#6b8175;
+}
+
+.auth-tab.active{
+    background:white;
+    color:#08763f;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.auth-box h2{
+    margin-bottom:8px;
+}
+
+.muted{
+    color:#6b8175;
+    margin-bottom:20px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:7px;
+    font-weight:700;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d8eee0;
+    border-radius:11px;
+    outline:none;
+    background:white;
+    color:#173b29;
+}
+
+input:focus,
+select:focus{
+    border-color:#63d98b;
+    box-shadow:0 0 0 3px rgba(99,217,139,.15);
+}
+
+.message{
+    margin-top:12px;
+    font-size:14px;
+    font-weight:700;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    height:70px;
+    background:white;
+    border-bottom:1px solid #d8eee0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.nav-logo{
+    font-size:21px;
+    font-weight:900;
+    color:#08763f;
+    letter-spacing:1px;
+}
+
+.settings-top-btn{
+    border:none;
+    background:#dffbe8;
+    color:#08763f;
+    padding:10px 15px;
+    border-radius:11px;
+    font-weight:800;
+}
+
+
+/* =========================
+   BANNER
+========================= */
+
+.top-banner{
+    width:100%;
+    overflow:hidden;
+}
+
+.top-banner img{
+    width:100%;
+    height:180px;
+    display:block;
+    object-fit:cover;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 20px 50px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        #dffbe8,
+        #ffffff
+    );
+    border:1px solid #d8eee0;
+    padding:30px;
+    border-radius:22px;
+    margin-bottom:35px;
+}
+
+.hero-small{
+    color:#199957;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.hero h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.section-title{
+    margin-bottom:18px;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(190px,1fr)
+    );
+    gap:18px;
+}
+
+.dashboard-card{
+    background:white;
+    border:1px solid #d8eee0;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 15px 40px rgba(27,120,70,.10);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-4px);
+}
+
+.card-icon{
+    font-size:32px;
+    margin-bottom:13px;
+}
+
+.dashboard-card h3{
+    margin-bottom:8px;
+}
+
+.dashboard-card p{
+    color:#6b8175;
+    line-height:1.5;
+    font-size:14px;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.panel{
+    background:white;
+    border:1px solid #d8eee0;
+    border-radius:20px;
+    padding:25px;
+    margin-top:25px;
+    box-shadow:0 15px 40px rgba(27,120,70,.10);
+}
+
+.panel h2{
+    margin-bottom:12px;
+}
+
+.panel-description{
+    color:#6b8175;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.info-box{
+    background:#effff4;
+    border:1px solid #d8eee0;
+    padding:18px;
+    border-radius:14px;
+    margin-top:15px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result-box{
+    background:#effff4;
+    border:1px solid #d8eee0;
+    border-radius:14px;
+    padding:18px;
+    margin-top:20px;
+    line-height:1.7;
+}
+
+.warning-box{
+    background:#fffbea;
+    border:1px solid #f0e1a8;
+    color:#65561d;
+    padding:18px;
+    border-radius:14px;
+    margin-top:18px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity-grid{
+    display:grid;
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(200px,1fr)
+    );
+    gap:18px;
+    margin-top:20px;
+}
+
+.activity-card{
+    border:1px solid #d8eee0;
+    border-radius:16px;
+    overflow:hidden;
+    background:white;
+}
+
+.activity-image{
+    width:100%;
+    height:150px;
+    background:#dffbe8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:60px;
+}
+
+.activity-card h3{
+    padding:15px 15px 5px;
+}
+
+.activity-card p{
+    color:#6b8175;
+    font-size:14px;
+    line-height:1.5;
+    padding:0 15px 15px;
+}
+
+.activity-card button{
+    margin:0 15px 15px;
+    padding:10px 13px;
+    border:none;
+    background:#dffbe8;
+    color:#08763f;
+    border-radius:9px;
+    font-weight:700;
+}
+
+
+/* =========================
+   ACTIVITY LIST
+========================= */
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px;
+    border-bottom:1px solid #d8eee0;
+}
+
+.activity-item:last-child{
+    border-bottom:none;
+}
+
+.remove-activity{
+    border:none;
+    background:#ffe8e8;
+    color:#c73535;
+    padding:7px 10px;
+    border-radius:8px;
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+.setting-box{
+    border:1px solid #d8eee0;
+    background:#effff4;
+    border-radius:16px;
+    padding:20px;
+    margin-top:18px;
+}
+
+.setting-box h3{
+    margin-bottom:10px;
+}
+
+.setting-box .primary-btn{
+    margin-top:15px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    background:#f0fff5;
+    border-top:1px solid #d8eee0;
+    padding:25px 20px;
+    color:#08763f;
+}
+
+footer p{
+    color:#6b8175;
+    margin-top:7px;
+    font-size:13px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .logo-big{
+        font-size:32px;
+    }
+
+    .navbar{
+        padding:0 15px;
+    }
+
+    .nav-logo{
+        font-size:17px;
+    }
+
+    .settings-top-btn{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .top-banner img{
+        height:120px;
+    }
+
+    .container{
+        padding:20px 14px 40px;
+    }
+
+    .hero{
+        padding:22px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .panel{
+        padding:18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<div id="loadingScreen">
+
+    <div class="loading-logo">
+        TEMANHARIAN
+    </div>
+
+    <div class="loader"></div>
+
+    <p>
+        Memuat aplikasi...
+    </p>
+
+</div>
+
+
+<!-- =========================
+     ENTRANCE
+========================= -->
+
+<section id="entrancePage" class="full-page">
+
+    <div class="entrance-box">
+
+        <div class="logo-big">
+            TEMANHARIAN
+        </div>
+
+        <p class="subtitle">
+            Teman untuk membantu aktivitas harianmu.
+        </p>
+
+        <button
+            class="primary-btn"
+            onclick="openLogin()">
+
+            MULAI
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LOGIN / DAFTAR
+========================= -->
+
+<section
+    id="authPage"
+    class="full-page hidden">
+
+    <div class="auth-box">
+
+        <div class="auth-logo">
+            TEMANHARIAN
+        </div>
+
+
+        <div class="auth-tabs">
+
+            <button
+                id="loginTab"
+                class="auth-tab active"
+                onclick="showLogin()">
+
+                Login
+
+            </button>
+
+            <button
+                id="registerTab"
+                class="auth-tab"
+                onclick="showRegister()">
+
+                Daftar
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+            <h2>
+                Selamat Datang 👋
+            </h2>
+
+            <p class="muted">
+                Login ke akun TEMANHARIAN.
+            </p>
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Masukkan username"
+                autocomplete="username">
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Masukkan password"
+                autocomplete="current-password">
+
+
+            <button
+                class="primary-btn full"
+                style="margin-top:15px"
+                onclick="loginUser()">
+
+                🔐 LOGIN
+
+            </button>
+
+
+            <p
+                id="loginMessage"
+                class="message">
+            </p>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div
+            id="registerForm"
+            class="hidden">
+
+            <h2>
+                Buat Akun 👤
+            </h2>
+
+            <p class="muted">
+                Buat akun TEMANHARIAN.
+            </p>
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="registerUsername"
+                placeholder="Buat username"
+                autocomplete="username">
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Buat password"
+                autocomplete="new-password">
+
+
+            <label>
+                Konfirmasi Password
+            </label>
+
+            <input
+                type="password"
+                id="registerConfirm"
+                placeholder="Ulangi password"
+                autocomplete="new-password">
+
+
+            <button
+                class="primary-btn full"
+                style="margin-top:15px"
+                onclick="registerUser()">
+
+                📝 DAFTAR
+
+            </button>
+
+
+            <p
+                id="registerMessage"
+                class="message">
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APP
+========================= -->
+
+<section
+    id="appPage"
+    class="hidden">
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            TEMANHARIAN
+        </div>
+
+
+        <!-- PENGATURAN POJOK KANAN -->
+
+        <button
+            class="settings-top-btn"
+            onclick="showSection('pengaturan')">
+
+            ⚙️
+            <span id="settingsText">
+                Pengaturan
+            </span>
+
+        </button>
+
+    </nav>
+
+
+    <!-- BANNER -->
+
+    <div
+        class="top-banner"
+        id="bannerArea">
+
+        <div
+            style="
+                height:180px;
+                background:linear-gradient(135deg,#63d98b,#08763f);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:white;
+                font-size:28px;
+                font-weight:900;
+            ">
+
+            TEMANHARIAN
+
+        </div>
+
+    </div>
+
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <p class="hero-small">
+                Selamat datang 👋
+            </p>
+
+            <h1 id="welcomeUsername">
+                TEMANHARIAN
+            </h1>
+
+            <p>
+                Teman sederhana untuk aktivitas harianmu.
+            </p>
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+
+        <h2 class="section-title">
+            🏠 Dashboard
+        </h2>
+
+
+        <div class="dashboard-grid">
+
+
+            <div
+                class="dashboard-card"
+                onclick="showSection('penjelasan')">
+
+                <div class="card-icon">
+                    📖
+                </div>
+
+                <h3>
+                    Penjelasan
+                </h3>
+
+                <p>
+                    Informasi dasar tentang kesehatan
+                    dan kebiasaan harian.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showSection('imt')">
+
+                <div class="card-icon">
+                    🧮
+                </div>
+
+                <h3>
+                    Kalkulator IMT
+                </h3>
+
+                <p>
+                    Hitung nilai IMT berdasarkan
+                    tinggi dan berat badan.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showSection('makanan')">
+
+                <div class="card-icon">
+                    🥗
+                </div>
+
+                <h3>
+                    Kalkulator Makanan
+                </h3>
+
+                <p>
+                    Lihat informasi nutrisi makanan.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showSection('aktivitas')">
+
+                <div class="card-icon">
+                    🏃
+                </div>
+
+                <h3>
+                    Aktivitas Harian
+                </h3>
+
+                <p>
+                    Pilihan aktivitas sederhana
+                    setiap hari.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showSection('aktivitasHariIni')">
+
+                <div class="card-icon">
+                    ✅
+                </div>
+
+                <h3>
+                    Aktivitas Hari Ini
+                </h3>
+
+                <p>
+                    Catat aktivitas yang sudah dilakukan.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             PENJELASAN
+        ========================== -->
+
+        <section
+            id="penjelasan"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                📖 Penjelasan
+            </h2>
+
+
+            <p>
+                TEMANHARIAN adalah aplikasi sederhana
+                untuk membantu memahami beberapa hal
+                mengenai aktivitas dan kebiasaan harian.
+            </p>
+
+
+            <div class="info-box">
+
+                <h3>
+                    🥗 Makanan
+                </h3>
+
+                <p>
+                    Makanan menyediakan berbagai zat gizi
+                    yang dibutuhkan tubuh seperti
+                    karbohidrat, protein, lemak, vitamin,
+                    mineral, dan serat.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>
+                    🏃 Aktivitas
+                </h3>
+
+                <p>
+                    Aktivitas fisik dapat menjadi bagian
+                    dari rutinitas sehat. Pilih aktivitas
+                    sesuai kemampuan dan lakukan dengan aman.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>
+                    😴 Istirahat
+                </h3>
+
+                <p>
+                    Istirahat dan tidur yang cukup juga
+                    merupakan bagian penting dari keseharian.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             IMT
+        ========================== -->
+
+        <section
+            id="imt"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                🧮 Kalkulator IMT
+            </h2>
+
+
+            <p class="panel-description">
+
+                IMT adalah hasil perhitungan
+                berat badan terhadap tinggi badan.
+
+            </p>
+
+
+            <label>
+                Tinggi badan (cm)
+            </label>
+
+            <input
+                type="number"
+                id="height"
+                placeholder="Contoh: 160">
+
+
+            <label>
+                Berat badan (kg)
+            </label>
+
+            <input
+                type="number"
+                id="weight"
+                placeholder="Contoh: 50">
+
+
+            <button
+                class="primary-btn"
+                style="margin-top:15px"
+                onclick="calculateBMI()">
+
+                🧮 Hitung IMT
+
+            </button>
+
+
+            <div
+                id="bmiResult"
+                class="result-box">
+
+                Hasil akan muncul di sini.
+
+            </div>
+
+
+            <div class="warning-box">
+
+                <strong>
+                    ℹ️ Catatan
+                </strong>
+
+                <p>
+                    Nilai IMT merupakan hasil perhitungan
+                    matematis dan bukan diagnosis kesehatan.
+                </p>
+
+                <p>
+                    Untuk remaja, IMT tidak sebaiknya
+                    digunakan sendirian untuk menentukan
+                    apakah seseorang "ideal" atau
+                    "kurang ideal". Penilaian pertumbuhan
+                    perlu mempertimbangkan usia, jenis
+                    kelamin, dan kurva pertumbuhan yang sesuai.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MAKANAN
+        ========================== -->
+
+        <section
+            id="makanan"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                🥗 Kalkulator Makanan
+            </h2>
+
+
+            <p class="panel-description">
+                Pilih makanan untuk melihat
+                perkiraan informasi nutrisi.
+            </p>
+
+
+            <label>
+                Pilih makanan
+            </label>
+
+            <select id="foodSelect">
+
+                <option value="">
+                    -- Pilih makanan --
+                </option>
+
+            </select>
+
+
+            <label>
+                Jumlah / porsi (gram)
+            </label>
+
+            <input
+                type="number"
+                id="foodAmount"
+                value="100"
+                placeholder="Contoh: 100">
+
+
+            <button
+                class="primary-btn"
+                style="margin-top:15px"
+                onclick="calculateFood()">
+
+                🥗 Hitung Nutrisi
+
+            </button>
+
+
+            <div
+                id="foodResult"
+                class="result-box">
+
+                Pilih makanan terlebih dahulu.
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AKTIVITAS
+        ========================== -->
+
+        <section
+            id="aktivitas"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                🏃 Aktivitas Harian
+            </h2>
+
+
+            <p class="panel-description">
+                Pilih aktivitas sesuai kemampuanmu.
+            </p>
+
+
+            <div class="activity-grid">
+
+
+                <div class="activity-card">
+
+                    <div class="activity-image">
+                        🚶
+                    </div>
+
+                    <h3>
+                        🚶 Jalan Kaki
+                    </h3>
+
+                    <p>
+                        Aktivitas sederhana yang dapat
+                        dilakukan dalam rutinitas harian.
+                    </p>
+
+                    <button
+                        onclick="addActivity('Jalan Kaki')">
+
+                        + Tambahkan
+
+                    </button>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <div class="activity-image">
+                        🧍
+                    </div>
+
+                    <h3>
+                        🧍 Squat
+                    </h3>
+
+                    <p>
+                        Gerakan latihan yang melibatkan
+                        beberapa kelompok otot.
+                    </p>
+
+                    <button
+                        onclick="addActivity('Squat')">
+
+                        + Tambahkan
+
+                    </button>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <div class="activity-image">
+                        🙆
+                    </div>
+
+                    <h3>
+                        🙆 Jumping Jack
+                    </h3>
+
+                    <p>
+                        Gerakan aktif yang dapat
+                        dilakukan dalam waktu singkat.
+                    </p>
+
+                    <button
+                        onclick="addActivity('Jumping Jack')">
+
+                        + Tambahkan
+
+                    </button>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <div class="activity-image">
+                        💪
+                    </div>
+
+                    <h3>
+                        💪 Push-up
+                    </h3>
+
+                    <p>
+                        Latihan menggunakan berat tubuh
+                        dengan gerakan terkontrol.
+                    </p>
+
+                    <button
+                        onclick="addActivity('Push-up')">
+
+                        + Tambahkan
+
+                    </button>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <div class="activity-image">
+                        🧘
+                    </div>
+
+                    <h3>
+                        🧘 Peregangan
+                    </h3>
+
+                    <p>
+                        Gerakan ringan untuk membantu
+                        tubuh melakukan persiapan aktivitas.
+                    </p>
+
+                    <button
+                        onclick="addActivity('Peregangan')">
+
+                        + Tambahkan
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AKTIVITAS HARI INI
+        ========================== -->
+
+        <section
+            id="aktivitasHariIni"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                ✅ Aktivitas Hari Ini
+            </h2>
+
+
+            <p class="panel-description">
+
+                Aktivitas yang kamu tambahkan
+                akan tersimpan di perangkat ini.
+
+            </p>
+
+
+            <div id="todayActivityList">
+
+                Belum ada aktivitas.
+
+            </div>
+
+
+            <button
+                class="danger-btn"
+                style="margin-top:20px"
+                onclick="clearActivities()">
+
+                🗑️ Hapus Aktivitas Hari Ini
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             PENGATURAN
+        ========================== -->
+
+        <section
+            id="pengaturan"
+            class="panel hidden">
+
+            <button
+                class="back-btn"
+                onclick="backDashboard()">
+
+                ← Dashboard
+
+            </button>
+
+
+            <h2>
+                ⚙️ Pengaturan
+            </h2>
+
+
+            <!-- BAHASA -->
+
+            <div class="setting-box">
+
+                <h3>
+                    🌐 Bahasa
+                </h3>
+
+                <label>
+                    Bahasa aplikasi
+                </label>
+
+                <select
+                    id="languageSelect"
+                    onchange="changeLanguage()">
+
+                    <option value="id">
+                        🇮🇩 Indonesia
+                    </option>
+
+                    <option value="en">
+                        🇬🇧 English
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PROFIL -->
+
+            <div class="setting-box">
+
+                <h3>
+                    👨‍🦱 Profil
+                </h3>
+
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="profileUsername"
+                    readonly>
+
+
+                <h3 style="margin-top:20px">
+                    📖 Biodata
+                </h3>
+
+
+                <label>
+                    Nama
+                </label>
+
+                <input
+                    type="text"
+                    id="bioName"
+                    placeholder="Masukkan nama">
+
+
+                <label>
+                    Umur
+                </label>
+
+                <input
+                    type="number"
+                    id="bioAge"
+                    placeholder="Masukkan umur">
+
+
+                <label>
+                    Jenis Kelamin
+                </label>
+
+                <select id="bioGender">
+
+                    <option value="">
+                        Pilih
+                    </option>
+
+                    <option value="Laki-laki">
+                        Laki-laki
+                    </option>
+
+                    <option value="Perempuan">
+                        Perempuan
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="saveProfile()">
+
+                    💾 Simpan Biodata
+
+                </button>
+
+
+                <p
+                    id="profileMessage"
+                    class="message">
+                </p>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="setting-box">
+
+                <h3>
+                    🔒 Ganti Password
+                </h3>
+
+
+                <label>
+                    Password Lama
+                </label>
+
+                <input
+                    type="password"
+                    id="oldPassword"
+                    placeholder="Password lama">
+
+
+                <label>
+                    Password Baru
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="Password baru">
+
+
+                <label>
+                    Konfirmasi Password Baru
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Ulangi password baru">
+
+
+                <button
+                    class="primary-btn"
+                    onclick="changePassword()">
+
+                    🔑 Simpan Password
+
+                </button>
+
+
+                <p
+                    id="passwordMessage"
+                    class="message">
+                </p>
+
+            </div>
+
+
+            <!-- LOGOUT -->
+
+            <div class="setting-box">
+
+                <h3>
+                    🚪 Akun
+                </h3>
+
+                <button
+                    class="danger-btn"
+                    onclick="logoutUser()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            REYFLOID // TEMANHARIAN
+        </strong>
+
+        <p>
+            Teman sederhana untuk aktivitas harian.
+        </p>
+
+    </footer>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   DATABASE / LOCAL STORAGE
+===================================================== */
+
+function getUser(){
+
+    const data =
+        localStorage.getItem(
+            "temanhari_user"
+        );
+
+    if(!data){
+        return null;
+    }
+
+    try{
+        return JSON.parse(data);
+    }catch{
+        return null;
+    }
+
+}
+
+
+function saveUser(user){
+
+    localStorage.setItem(
+        "temanhari_user",
+        JSON.stringify(user)
+    );
+
+}
+
+
+function setLoggedIn(status){
+
+    localStorage.setItem(
+        "temanhari_logged",
+        status ? "true" : "false"
+    );
+
+}
+
+
+function isLoggedIn(){
+
+    return (
+        localStorage.getItem(
+            "temanhari_logged"
+        ) === "true"
+    );
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function getProfile(){
+
+    const user =
+        getUser();
+
+    if(!user){
+        return null;
+    }
+
+    const data =
+        localStorage.getItem(
+            "temanhari_profile_" +
+            user.username
+        );
+
+    if(!data){
+
+        return {
+            name:"",
+            age:"",
+            gender:""
+        };
+
+    }
+
+    try{
+        return JSON.parse(data);
+    }catch{
+
+        return {
+            name:"",
+            age:"",
+            gender:""
+        };
+
+    }
+
+}
+
+
+function saveProfileData(profile){
+
+    const user =
+        getUser();
+
+    if(!user){
+        return false;
+    }
+
+    localStorage.setItem(
+        "temanhari_profile_" +
+        user.username,
+        JSON.stringify(profile)
+    );
+
+    return true;
+
+}
+
+
+/* =====================================================
+   ACTIVITY DATABASE
+===================================================== */
+
+function getTodayKey(){
+
+    const date =
+        new Date();
+
+    return (
+        date.getFullYear() +
+        "-" +
+        String(
+            date.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            date.getDate()
+        ).padStart(2,"0")
+    );
+
+}
+
+
+function getActivities(){
+
+    const user =
+        getUser();
+
+    if(!user){
+        return [];
+    }
+
+    const key =
+        "temanhari_activity_" +
+        user.username +
+        "_" +
+        getTodayKey();
+
+    const data =
+        localStorage.getItem(key);
+
+    if(!data){
+        return [];
+    }
+
+    try{
+        return JSON.parse(data);
+    }catch{
+        return [];
+    }
+
+}
+
+
+function saveActivities(activities){
+
+    const user =
+        getUser();
+
+    if(!user){
+        return false;
+    }
+
+    const key =
+        "temanhari_activity_" +
+        user.username +
+        "_" +
+        getTodayKey();
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(activities)
+    );
+
+    return true;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                document
+                    .getElementById(
+                        "loadingScreen"
+                    )
+                    .style.display =
+                    "none";
+
+
+                if(
+                    isLoggedIn() &&
+                    getUser()
+                ){
+
+                    openDashboard();
+
+                }else{
+
+                    showEntrance();
+
+                }
+
+            },
+            1000
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ENTRANCE
+===================================================== */
+
+function showEntrance(){
+
+    document
+        .getElementById(
+            "entrancePage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "appPage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+}
+
+
+function openLogin(){
+
+    document
+        .getElementById(
+            "entrancePage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+    showLogin();
+
+}
+
+
+/* =====================================================
+   AUTH TAB
+===================================================== */
+
+function showLogin(){
+
+    document
+        .getElementById(
+            "loginForm"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "registerForm"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "loginTab"
+        )
+        .classList.add(
+            "active"
+        );
+
+    document
+        .getElementById(
+            "registerTab"
+        )
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+function showRegister(){
+
+    document
+        .getElementById(
+            "loginForm"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "registerForm"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "loginTab"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    document
+        .getElementById(
+            "registerTab"
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+function registerUser(){
+
+    const username =
+        document
+            .getElementById(
+                "registerUsername"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "registerPassword"
+            )
+            .value;
+
+
+    const confirm =
+        document
+            .getElementById(
+                "registerConfirm"
+            )
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "registerMessage"
+        );
+
+
+    if(
+        !username ||
+        !password ||
+        !confirm
+    ){
+
+        message.textContent =
+            "⚠️ Semua bagian harus diisi.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(username.length < 3){
+
+        message.textContent =
+            "⚠️ Username minimal 3 karakter.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(password.length < 4){
+
+        message.textContent =
+            "⚠️ Password minimal 4 karakter.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(password !== confirm){
+
+        message.textContent =
+            "⚠️ Konfirmasi password tidak cocok.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(getUser()){
+
+        message.textContent =
+            "⚠️ Akun sudah ada. Silakan login.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    saveUser({
+
+        username:username,
+        password:password
+
+    });
+
+
+    setLoggedIn(false);
+
+
+    message.textContent =
+        "✅ Akun berhasil dibuat. Silakan login.";
+
+    message.style.color =
+        "#199957";
+
+
+    document
+        .getElementById(
+            "loginUsername"
+        )
+        .value =
+        username;
+
+
+    setTimeout(
+        showLogin,
+        800
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function loginUser(){
+
+    const username =
+        document
+            .getElementById(
+                "loginUsername"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "loginPassword"
+            )
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    const user =
+        getUser();
+
+
+    if(!user){
+
+        message.textContent =
+            "⚠️ Belum ada akun. Silakan daftar.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(
+        username !== user.username ||
+        password !== user.password
+    ){
+
+        message.textContent =
+            "❌ Username atau password salah.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    setLoggedIn(true);
+
+
+    message.textContent =
+        "✅ Login berhasil.";
+
+    message.style.color =
+        "#199957";
+
+
+    setTimeout(
+        openDashboard,
+        500
+    );
+
+}
+
+
+/* =====================================================
+   OPEN DASHBOARD
+===================================================== */
+
+function openDashboard(){
+
+    document
+        .getElementById(
+            "entrancePage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "appPage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+
+    const user =
+        getUser();
+
+
+    if(user){
+
+        document
+            .getElementById(
+                "welcomeUsername"
+            )
+            .textContent =
+            user.username;
+
+    }
+
+
+    loadProfile();
+
+    loadActivities();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logoutUser(){
+
+    setLoggedIn(false);
+
+    document
+        .getElementById(
+            "appPage"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+    showLogin();
+
+}
+
+
+/* =====================================================
+   DASHBOARD NAVIGATION
+===================================================== */
+
+function showSection(sectionId){
+
+    const sections = [
+
+        "penjelasan",
+        "imt",
+        "makanan",
+        "aktivitas",
+        "aktivitasHariIni",
+        "pengaturan"
+
+    ];
+
+
+    sections.forEach(
+        function(id){
+
+            const section =
+                document.getElementById(id);
+
+            if(section){
+
+                section.classList.add(
+                    "hidden"
+                );
+
+            }
+
+        }
+    );
+
+
+    const selected =
+        document.getElementById(
+            sectionId
+        );
+
+
+    if(selected){
+
+        selected.classList.remove(
+            "hidden"
+        );
+
+        selected.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+
+    if(
+        sectionId ===
+        "aktivitasHariIni"
+    ){
+
+        loadActivities();
+
+    }
+
+
+    if(
+        sectionId ===
+        "pengaturan"
+    ){
+
+        loadProfile();
+
+    }
+
+}
+
+
+function backDashboard(){
+
+    const sections = [
+
+        "penjelasan",
+        "imt",
+        "makanan",
+        "aktivitas",
+        "aktivitasHariIni",
+        "pengaturan"
+
+    ];
+
+
+    sections.forEach(
+        function(id){
+
+            const section =
+                document.getElementById(id);
+
+            if(section){
+
+                section.classList.add(
+                    "hidden"
+                );
+
+            }
+
+        }
+    );
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =====================================================
+   IMT
+===================================================== */
+
+function calculateBMI(){
+
+    const height =
+        parseFloat(
+            document
+                .getElementById(
+                    "height"
+                )
+                .value
+        );
+
+
+    const weight =
+        parseFloat(
+            document
+                .getElementById(
+                    "weight"
+                )
+                .value
+        );
+
+
+    const result =
+        document.getElementById(
+            "bmiResult"
+        );
+
+
+    if(
+        !height ||
+        !weight ||
+        height <= 0 ||
+        weight <= 0
+    ){
+
+        result.innerHTML =
+            "⚠️ Masukkan tinggi dan berat badan dengan benar.";
+
+        return;
+
+    }
+
+
+    const heightMeter =
+        height / 100;
+
+
+    const bmi =
+        weight /
+        (
+            heightMeter *
+            heightMeter
+        );
+
+
+    let category;
+
+
+    if(bmi < 18.5){
+
+        category =
+            "Di bawah 18,5 secara matematis.";
+
+    }else if(bmi < 25){
+
+        category =
+            "Antara 18,5–24,9 secara matematis.";
+
+    }else{
+
+        category =
+            "25 atau lebih secara matematis.";
+
+    }
+
+
+    result.innerHTML = `
+
+        <strong>
+            📊 IMT: ${bmi.toFixed(2)} kg/m²
+        </strong>
+
+        <br><br>
+
+        ${category}
+
+        <br><br>
+
+        <strong>
+            👤 Catatan untuk remaja
+        </strong>
+
+        <p>
+            Angka IMT tidak sebaiknya digunakan
+            sendirian untuk menentukan apakah seseorang
+            "ideal" atau "kurang ideal".
+        </p>
+
+        <p>
+            Penilaian pertumbuhan remaja perlu
+            mempertimbangkan usia, jenis kelamin,
+            dan kurva pertumbuhan yang sesuai.
+        </p>
+
+    `;
+
+}
+
+
+/* =====================================================
+   FOOD DATABASE
+===================================================== */
+
+const foodData = [
+
+    {
+        nama:"Nasi Putih",
+        karbohidrat:28,
+        protein:2.7,
+        energi:130,
+        lemak:0.3,
+        serat:0.4
+    },
+
+    {
+        nama:"Telur Ayam",
+        karbohidrat:1.1,
+        protein:12.6,
+        energi:143,
+        lemak:9.5,
+        serat:0
+    },
+
+    {
+        nama:"Dada Ayam",
+        karbohidrat:0,
+        protein:31,
+        energi:165,
+        lemak:3.6,
+        serat:0
+    },
+
+    {
+        nama:"Tempe",
+        karbohidrat:9,
+        protein:20,
+        energi:193,
+        lemak:11,
+        serat:1.4
+    },
+
+    {
+        nama:"Tahu",
+        karbohidrat:1.9,
+        protein:8.1,
+        energi:76,
+        lemak:4.8,
+        serat:0.3
+    },
+
+    {
+        nama:"Pisang",
+        karbohidrat:22.8,
+        protein:1.1,
+        energi:89,
+        lemak:0.3,
+        serat:2.6
+    },
+
+    {
+        nama:"Apel",
+        karbohidrat:13.8,
+        protein:0.3,
+        energi:52,
+        lemak:0.2,
+        serat:2.4
+    },
+
+    {
+        nama:"Oat",
+        karbohidrat:66.3,
+        protein:16.9,
+        energi:389,
+        lemak:6.9,
+        serat:10.6
+    },
+
+    {
+        nama:"Kentang",
+        karbohidrat:17,
+        protein:2,
+        energi:77,
+        lemak:0.1,
+        serat:2.2
+    },
+
+    {
+        nama:"Susu",
+        karbohidrat:4.8,
+        protein:3.2,
+        energi:61,
+        lemak:3.3,
+        serat:0
+    }
+
+];
+
+
+function loadFoodData(){
+
+    const select =
+        document.getElementById(
+            "foodSelect"
+        );
+
+
+    foodData.forEach(
+        function(food,index){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                index;
+
+            option.textContent =
+                food.nama;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FOOD CALCULATOR
+===================================================== */
+
+function calculateFood(){
+
+    const select =
+        document.getElementById(
+            "foodSelect"
+        );
+
+
+    const amount =
+        parseFloat(
+            document
+                .getElementById(
+                    "foodAmount"
+                )
+                .value
+        );
+
+
+    const result =
+        document.getElementById(
+            "foodResult"
+        );
+
+
+    if(
+        select.value === "" ||
+        !amount ||
+        amount <= 0
+    ){
+
+        result.innerHTML =
+            "⚠️ Pilih makanan dan masukkan jumlah gram.";
+
+        return;
+
+    }
+
+
+    const food =
+        foodData[
+            parseInt(
+                select.value
+            )
+        ];
+
+
+    const multiplier =
+        amount / 100;
+
+
+    result.innerHTML = `
+
+        <h3>
+            🥗 ${food.nama}
+        </h3>
+
+        <p>
+            Jumlah:
+            <strong>
+                ${amount} gram
+            </strong>
+        </p>
+
+        <hr><br>
+
+        <p>
+            🍚 Karbohidrat:
+            <strong>
+                ${(food.karbohidrat * multiplier).toFixed(1)} g
+            </strong>
+        </p>
+
+        <p>
+            🥩 Protein:
+            <strong>
+                ${(food.protein * multiplier).toFixed(1)} g
+            </strong>
+        </p>
+
+        <p>
+            ⚡ Energi:
+            <strong>
+                ${(food.energi * multiplier).toFixed(0)} kcal
+            </strong>
+        </p>
+
+        <p>
+            🥑 Lemak:
+            <strong>
+                ${(food.lemak * multiplier).toFixed(1)} g
+            </strong>
+        </p>
+
+        <p>
+            🌾 Serat:
+            <strong>
+                ${(food.serat * multiplier).toFixed(1)} g
+            </strong>
+        </p>
+
+        <br>
+
+        <small>
+            Nilai adalah perkiraan dan dapat berbeda
+            tergantung jenis serta pengolahan makanan.
+        </small>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ACTIVITIES
+===================================================== */
+
+function addActivity(name){
+
+    const activities =
+        getActivities();
+
+
+    activities.push({
+
+        name:name,
+
+        time:
+            new Date()
+            .toLocaleTimeString(
+                "id-ID",
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+            )
+
+    });
+
+
+    saveActivities(
+        activities
+    );
+
+
+    alert(
+        "✅ " +
+        name +
+        " ditambahkan ke Aktivitas Hari Ini."
+    );
+
+
+    loadActivities();
+
+}
+
+
+function loadActivities(){
+
+    const container =
+        document.getElementById(
+            "todayActivityList"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    const activities =
+        getActivities();
+
+
+    if(
+        activities.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="info-box">
+
+                Belum ada aktivitas hari ini.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    activities.forEach(
+        function(activity,index){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "activity-item";
+
+
+            item.innerHTML = `
+
+                <div>
+
+                    <strong>
+                        ✅ ${activity.name}
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Ditambahkan pukul
+                        ${activity.time}
+                    </small>
+
+                </div>
+
+
+                <button
+                    class="remove-activity"
+                    onclick="removeActivity(${index})">
+
+                    Hapus
+
+                </button>
+
+            `;
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+function removeActivity(index){
+
+    const activities =
+        getActivities();
+
+
+    activities.splice(
+        index,
+        1
+    );
+
+
+    saveActivities(
+        activities
+    );
+
+
+    loadActivities();
+
+}
+
+
+function clearActivities(){
+
+    const activities =
+        getActivities();
+
+
+    if(
+        activities.length === 0
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Hapus semua aktivitas hari ini?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    saveActivities([]);
+
+
+    loadActivities();
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function loadProfile(){
+
+    const user =
+        getUser();
+
+
+    if(!user){
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "profileUsername"
+        )
+        .value =
+        user.username;
+
+
+    const profile =
+        getProfile();
+
+
+    document
+        .getElementById(
+            "bioName"
+        )
+        .value =
+        profile.name || "";
+
+
+    document
+        .getElementById(
+            "bioAge"
+        )
+        .value =
+        profile.age || "";
+
+
+    document
+        .getElementById(
+            "bioGender"
+        )
+        .value =
+        profile.gender || "";
+
+}
+
+
+function saveProfile(){
+
+    const profile = {
+
+        name:
+            document
+                .getElementById(
+                    "bioName"
+                )
+                .value
+                .trim(),
+
+        age:
+            document
+                .getElementById(
+                    "bioAge"
+                )
+                .value,
+
+        gender:
+            document
+                .getElementById(
+                    "bioGender"
+                )
+                .value
+
+    };
+
+
+    saveProfileData(
+        profile
+    );
+
+
+    const message =
+        document.getElementById(
+            "profileMessage"
+        );
+
+
+    message.textContent =
+        "✅ Biodata berhasil disimpan.";
+
+    message.style.color =
+        "#199957";
+
+}
+
+
+/* =====================================================
+   CHANGE PASSWORD
+===================================================== */
+
+function changePassword(){
+
+    const user =
+        getUser();
+
+
+    const oldPassword =
+        document
+            .getElementById(
+                "oldPassword"
+            )
+            .value;
+
+
+    const newPassword =
+        document
+            .getElementById(
+                "newPassword"
+            )
+            .value;
+
+
+    const confirmPassword =
+        document
+            .getElementById(
+                "confirmPassword"
+            )
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+
+    if(!user){
+
+        message.textContent =
+            "❌ Akun tidak ditemukan.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(
+        oldPassword !==
+        user.password
+    ){
+
+        message.textContent =
+            "❌ Password lama salah.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(
+        newPassword.length < 4
+    ){
+
+        message.textContent =
+            "⚠️ Password baru minimal 4 karakter.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    if(
+        newPassword !==
+        confirmPassword
+    ){
+
+        message.textContent =
+            "⚠️ Konfirmasi password tidak cocok.";
+
+        message.style.color =
+            "#c73535";
+
+        return;
+
+    }
+
+
+    user.password =
+        newPassword;
+
+
+    saveUser(user);
+
+
+    document
+        .getElementById(
+            "oldPassword"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "newPassword"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "confirmPassword"
+        )
+        .value = "";
+
+
+    message.textContent =
+        "✅ Password berhasil diperbarui.";
+
+    message.style.color =
+        "#199957";
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+const languageData = {
+
+    id:{
+        settings:"Pengaturan",
+        dashboard:"🏠 Dashboard",
+        explanation:"Penjelasan",
+        bmi:"Kalkulator IMT",
+        food:"Kalkulator Makanan",
+        activity:"Aktivitas Harian",
+        today:"Aktivitas Hari Ini"
+    },
+
+    en:{
+        settings:"Settings",
+        dashboard:"🏠 Dashboard",
+        explanation:"Explanation",
+        bmi:"BMI Calculator",
+        food:"Food Calculator",
+        activity:"Daily Activity",
+        today:"Today's Activity"
+    }
+
+};
+
+
+function changeLanguage(){
+
+    const language =
+        document.getElementById(
+            "languageSelect"
+        ).value;
+
+
+    localStorage.setItem(
+        "temanhari_language",
+        language
+    );
+
+
+    applyLanguage(
+        language
+    );
+
+}
+
+
+function applyLanguage(language){
+
+    const data =
+        languageData[
+            language
+        ] ||
+        languageData.id;
+
+
+    document
+        .getElementById(
+            "settingsText"
+        )
+        .textContent =
+        data.settings;
+
+
+    document
+        .querySelector(
+            ".section-title"
+        )
+        .textContent =
+        data.dashboard;
+
+
+    const cards =
+        document.querySelectorAll(
+            ".dashboard-card h3"
+        );
+
+
+    if(cards.length >= 5){
+
+        cards[0].textContent =
+            data.explanation;
+
+        cards[1].textContent =
+            data.bmi;
+
+        cards[2].textContent =
+            data.food;
+
+        cards[3].textContent =
+            data.activity;
+
+        cards[4].textContent =
+            data.today;
+
+    }
+
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadFoodData();
+
+
+        const savedLanguage =
+            localStorage.getItem(
+                "temanhari_language"
+            ) || "id";
+
+
+        document
+            .getElementById(
+                "languageSelect"
+            )
+            .value =
+            savedLanguage;
+
+
+        applyLanguage(
+            savedLanguage
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
